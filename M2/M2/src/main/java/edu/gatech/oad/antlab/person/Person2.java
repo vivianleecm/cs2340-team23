@@ -30,8 +30,19 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 2 put your implementation here
-	  return null;
+	  String answer = "";
+	  String[] components = new String[input.length()];
+	  for (int i = 0; i < input.length(); i++) {
+	  	components[i] = input.substring(i, i + 1);
+	  }
+	  while (answer.length() < input.length()) {
+	  	int index = (int)(Math.random() * input.length());
+	  	if(components[index] != null) {
+	  		answer += components[index];
+	  		components[index] = null;
+	  	}
+	  }
+	  return answer;
 	}
 	/**
 	 * Return a string rep of this object
