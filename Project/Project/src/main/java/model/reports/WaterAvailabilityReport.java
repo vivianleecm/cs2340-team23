@@ -1,19 +1,10 @@
 package model.reports;
 
 import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
-import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 
-import java.time.LocalDateTime;
-
-public class WaterAvailabilityReport {
-    private LocalDateTime time;
-    private int number;
-    private String name;
-    private String address;
-    private LatLong coordinates;
-    private WaterType type;
-    private WaterCondition condition;
+public final class WaterAvailabilityReport extends WaterReport {
+    private final WaterType type;
+    private final WaterCondition condition;
 
     /**
      * Generates a new WaterAvailabilityReport
@@ -21,57 +12,19 @@ public class WaterAvailabilityReport {
      * @param name              the name of the reporter
      * @param address           the formatted address of the water source
      * @param coordinates       the coordinates of the water source
-     * @param type              the type of water source
-     * @param condition         the condition of the water source
+     * @param t                 the type of water source
+     * @param c                 the condition of the water source
      */
     public WaterAvailabilityReport(int number,
                                    String name,
                                    String address,
                                    LatLong coordinates,
-                                   WaterType type,
-                                   WaterCondition condition) {
-        time = LocalDateTime.now();
-        this.number = number;
-        this.name = name;
-        this.address = address;
-        this.coordinates = coordinates;
-        this.type = type;
-        this.condition = condition;
+                                   WaterType t,
+                                   WaterCondition c) {
+        super(number, name, address, coordinates);
+        type = t;
+        condition = c;
     }
-
-    /**
-     * Retrieves the date and time of the report
-     * @return      date and time of report
-     */
-    public String getDateAndTime() { return time.getMonth().getValue() +
-            "/" + time.getDayOfMonth() +
-            "/" + time.getYear() +
-            ", " + time.getHour() +
-            ":" + String.format("%02d", time.getMinute()); }
-
-    /**
-     * Retrieves the report number
-     * @return      number of report
-     */
-    public int getReportNumber() { return number; }
-
-    /**
-     * Retrieves the name of the person who made the report
-     * @return      name of report creator
-     */
-    public String getNameOfReporter() { return name; }
-
-    /**
-     * Retrieves the location of the report
-     * @return      location of report, in address form
-     */
-    public String getLocationOfReport() { return address; }
-
-    /**
-     * Retrieves the location of the report, in coordinates
-     * @return      location of report, in coordinates
-     */
-    public LatLong getCoordinates() { return coordinates; }
 
     /**
      * Retrieves the water source type
